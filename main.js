@@ -23,8 +23,9 @@ const alphabet = ["abcdefghijklmnopqrstuvwxyz"]
 function init(place) {
     console.log("Initialization attempted.");
     if (sessionInfo.id === null) {
-        newSession(place)
+        newSession(place);
         initTripData();
+        document.getElementById("stats").hidden = false;
     }
     console.log("Initialization complete.")
     return true;
@@ -61,6 +62,7 @@ function clearSession() {
     gameData.abcGameInProgress = false;
     gameData.currentLetterIndex = 0;
     gameData.words = []
+    document.getElementById("stats").hidden = true;
     console.log("Game data cleared.");
 }
 //Core function for the ABC game. 
