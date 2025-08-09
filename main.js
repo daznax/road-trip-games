@@ -3,13 +3,13 @@
 console.log("Main JS file loaded for Road Trips.");
 const gameData = {
     sessionId: null,
-    states = [],
-    stateCount = 0,
-    amazonTrucks = 0,
-    abcGamesCompleted = 0,
-    abcGameInProgress = false,
-    currentLetterIndex = 0,
-    words = []
+    states: [],
+    stateCount: 0,
+    amazonTrucks: 0,
+    abcGamesCompleted: 0,
+    abcGameInProgress: false,
+    currentLetterIndex: 0,
+    words: []
 };
 const sessionInfo = {
     id: null,
@@ -17,10 +17,12 @@ const sessionInfo = {
     date: null,
     gameData: gameData,
 };
-const alphabet = ["abcdefghijklmnopqrstuvwxyz"]
+const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
 // Initialize the game. "Place" is an optional parameter to specify the trip location.
-function init(place) {
+function init() {
+    place = document.getElementById("placeInput").value.trim();
+    
     console.log("Initialization attempted.");
     if (sessionInfo.id === null) {
         newSession(place);
@@ -66,7 +68,9 @@ function clearSession() {
     console.log("Game data cleared.");
 }
 //Core function for the ABC game. 
-function abcGameCore(word) {
+function abcGameCore() {
+    word = document.getElementById("abcInput").value.trim();
+    
     //start new abc game if one is not in progress
     if (!gameData.abcGameInProgress) {
         console.log("Starting a new ABC game.");
@@ -85,35 +89,44 @@ function abcGameCore(word) {
 }
 //Processes a single word input for the ABC game.
 function processOneWord(word) {
-    if (word = "quit") {
-        console.log("Quitting ABC game.");
+    if (word == "quit") {
+        console.log("Word = quit. Quitting ABC game.");
         gameData.abcGameInProgress = false;
         gameData.currentLetterIndex = 0;
         return true
     }
-    targetLetter=alphabet[gameData.currentLetterIndex]
+    index=gameData.currentLetterIndex
+    console.log('Current letter index:', index);
+    targetLetter=alphabet.charAt(index)
+    console.log('Current letter:', targetLetter);
     firstLetter=word.charAt(0)
-    err = 0
+    error = 0
     if (firstLetter != targetLetter) {
         console.log(`Error: Word does not start with the correct letter. Expected ${targetLetter}, got ${firstLetter}`);
-        return err++
+        error++
+        console.log(`Error count: ${error}`);
+        return false
     } else {
         gameData.words.push(word + ",")
         gameData.currentLetterIndex++
+        document.getElementById("letter").innerText = `You're looking for a word that starts with... ${alphabet.charAt(gameData.currentLetterIndex).toUpperCase()}`;
+        console.log(`Word accepted: ${word}. Moving to next letter.`);
     }
     if (firstLetter == "z") {
         gameData.abcGamesCompleted++
         alert("Congratulations! You've completed the ABC game! Resetting things for the next game")
         gameData.abcGameInProgress = false;
         gameData.currentLetterIndex = 0;
-    } return
+    } return false
 }
 //TODO: Implement a real dictionary check.
 function validWord(word) {
     console.log("Determining if this is a valid word input.")
 }
 //Core function to log unique state license plates.
-function stateListCore(state) {
+function stateListCore() {
+    state = document.getElementById("stateProvinceInput").value.trim().toUpperCase();
+    
     if (!isUniqueState(state)) {
         return alert(`State ${state} has already been logged.`);
     } else {

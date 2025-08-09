@@ -4,13 +4,19 @@
     <meta charset="UTF-8" />
     <title>Game Session</title>
     <script src="main.js"></script>
+    <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-    <a href="main"><button id ="return">Back to Menu</button></a>
-    <h2>Amazon Truck Counter</h2>
-    <button id ="amazonTruck" onclick="incrementAmazonTrucks()">Prime Truck!</button>
-    <h2>License Plates</h2>
-    <form>
+    <div class="topnav">
+        <a href="main"><button id ="return">Back to Menu</button></a>
+        <p id="destinationDisplay"></p>
+    </div>
+    <div class="game" id="amazonTruck">
+        <h2>Amazon Truck Counter</h2>
+        <button id ="amazonTruck" onclick="incrementAmazonTrucks()">Prime Truck!</button>
+    </div>
+    <div class="game" id="licensePlates">
+        <h2>License Plates</h2>
         <input list="statesProvinces" id="stateProvinceInput" name="stateProvinceInput" placeholder="Pick from the list!"/>
         <datalist id="statesProvinces"> 
             <option value="AL">Alabama</option>
@@ -75,13 +81,13 @@
             <option value="SK">Saskatchewan</option>
             <option value="Mex">Mexico</option>        
         </datalist>
-        <input type="submit" id="stateProvinceSubmit" value="Submit" onclick="statListCore(stateProvinceInput)"/>
-    </form>
-    <h2>ABC Game</h2>
-    <p>Start with the letter "A"!</p>
-    <form>
+        <button type="submit" id="stateProvinceSubmit" onclick="stateListCore()">Add State</button>
+    </div>
+    <div class="game" id="abcGame">
+        <h2>ABC Game</h2>
+        <p id="letter">Start with the letter "A"!</p>
         <input type="text" id="abcInput" name="abcInput"/>
-        <input type="submit" id="abcSubmit" value="Submit" onclick="abcGameCore(abcInput)"/>
-    </form>
+        <button id="abcSubmit" onclick="abcGameCore()">Add Word</button>
+    </div>
 </body>
 </html>
