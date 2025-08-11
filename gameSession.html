@@ -7,87 +7,127 @@
     <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-    <div class="topnav">
-        <a href="main"><button id ="return">Back to Menu</button></a>
-        <p id="destinationDisplay"></p>
-    </div>
-    <div class="game" id="amazonTruck">
-        <h2>Amazon Truck Counter</h2>
-        <button id ="amazonTruck" onclick="incrementAmazonTrucks()">Prime Truck!</button>
-    </div>
-    <div class="game" id="licensePlates">
-        <h2>License Plates</h2>
-        <input list="statesProvinces" id="stateProvinceInput" name="stateProvinceInput" placeholder="Pick from the list!"/>
-        <datalist id="statesProvinces"> 
-            <option value="AL">Alabama</option>
-            <option value="AK">Alaska</option>
-            <option value="AZ">Arizona</option>
-            <option value="AR">Arkansas</option>
-            <option value="CA">California</option>
-            <option value="CO">Colorado</option>
-            <option value="CT">Connecticut</option>
-            <option value="DE">Delaware</option>
-            <option value="FL">Florida</option>
-            <option value="GA">Georgia</option>
-            <option value="HI">Hawaii</option>
-            <option value="ID">Idaho</option>
-            <option value="IL">Illinois</option>
-            <option value="IN">Indiana</option>
-            <option value="IA">Iowa</option>
-            <option value="KS">Kansas</option>
-            <option value="KY">Kentucky</option>
-            <option value="LA">Louisiana</option>
-            <option value="ME">Maine</option>
-            <option value="MD">Maryland</option>
-            <option value="MA">Massachusetts</option>
-            <option value="MI">Michigan</option>
-            <option value="MN">Minnesota</option>
-            <option value="MS">Mississippi</option>
-            <option value="MO">Missouri</option>
-            <option value="MT">Montana</option>
-            <option value="NE">Nebraska</option>
-            <option value="NV">Nevada</option>
-            <option value="NH">New Hampshire</option>
-            <option value="NJ">New Jersey</option>
-            <option value="NM">New Mexico</option>
-            <option value="NY">New York</option>
-            <option value="NC">North Carolina</option>
-            <option value="ND">North Dakota</option>
-            <option value="OH">Ohio</option>
-            <option value="OK">Oklahoma</option>
-            <option value="OR">Oregon</option>
-            <option value="PA">Pennsylvania</option>
-            <option value="RI">Rhode Island</option>
-            <option value="SC">South Carolina</option>
-            <option value="SD">South Dakota</option>
-            <option value="TN">Tennessee</option>
-            <option value="TX">Texas</option>
-            <option value="UT">Utah</option>
-            <option value="VT">Vermont</option>
-            <option value="VA">Virginia</option>
-            <option value="WA">Washington</option>
-            <option value="WV">West Virginia</option>
-            <option value="WI">Wisconsin</option>
-            <option value="WY">Wyoming</option>
-            <option value="AB">Alberta</option>
-            <option value="BC">British Columbia</option>
-            <option value="MB">Manitoba</option>
-            <option value="NB">New Brunswick</option>
-            <option value="NL">Newfoundland and Labrador</option>
-            <option value="NS">Nova Scotia</option>
-            <option value="ON">Ontario</option>
-            <option value="PE">Prince Edward Island</option>
-            <option value="QC">Quebec</option>
-            <option value="SK">Saskatchewan</option>
-            <option value="Mex">Mexico</option>        
-        </datalist>
-        <button type="submit" id="stateProvinceSubmit" onclick="stateListCore()">Add State</button>
-    </div>
-    <div class="game" id="abcGame">
-        <h2>ABC Game</h2>
-        <p id="letter">Start with the letter "A"!</p>
-        <input type="text" id="abcInput" name="abcInput"/>
-        <button id="abcSubmit" onclick="abcGameCore()">Add Word</button>
+    <div id="newSession" hidden>
+        <div class="topnav">
+            <a href="./index.html"><button id ="return">Back to Menu</button></a>
+            <p id="destinationDisplay"></p>
+        </div>
+    </div> 
+    <div id="gameSession">
+        <div class="topnav">
+            <a href="./index.html"><button id ="return">Back to Menu</button></a>
+            <button id="quit" onclick=clearSession()>Clear Session</button>
+            <p id="destinationDisplay"></p>
+        </div>
+        <div class="games">
+            <div class="card" id="amazonTruck">
+                <button id ="amazonTruck" onclick="incrementAmazonTrucks()">Prime Truck!</button>
+            </div>
+            <div class="card" id="licensePlates">
+                <h2>License Plates</h2>
+                <input list="statesProvinces" id="stateProvinceInput" name="stateProvinceInput" placeholder="New state!"/>
+                <datalist id="statesProvinces"> 
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                    <option value="AB">Alberta</option>
+                    <option value="BC">British Columbia</option>
+                    <option value="MB">Manitoba</option>
+                    <option value="NB">New Brunswick</option>
+                    <option value="NL">Newfoundland and Labrador</option>
+                    <option value="NS">Nova Scotia</option>
+                    <option value="ON">Ontario</option>
+                    <option value="PE">Prince Edward Island</option>
+                    <option value="QC">Quebec</option>
+                    <option value="SK">Saskatchewan</option>
+                    <option value="Mex">Mexico</option>        
+                </datalist>
+                <button type="submit" id="stateProvinceSubmit" onclick="stateListCore()">Add State</button>
+            </div>
+            <div class="card" id="abcGame">
+                <h2>ABC Game</h2>
+                <p id="letter">Start with the letter "A"!</p>
+                <input type="text" id="abcInput" name="abcInput"/>
+                <button id="abcSubmit" onclick="abcGameCore()">Add Word</button>
+            </div>
+        </div>
+        <div class="statsViewer games">
+            <div class="statsContainer">    
+                <div class="stats card" id="truckStats">
+                    <h2>Amazon Trucks</h2>
+                    <p id="truckCount">0</p>
+                </div>
+                <div class="stats card" id="plateStats">
+                    <h2>Plates Seen</h2>
+                    <p id="plateList">No plates yet!</p>
+                </div>
+                <div class="stats card" id="abcStats">
+                    <h2>Words Logged</h2>
+                    <p id="wordList">No words yet!</p>
+                </div>
+            </div>
+            <p>There is something timeless about a road trip—the hum of tires on asphalt, the shifting landscapes, and the inevitable stop at a quirky roadside diner with the worlds best pie. 
+                From Route 66s neon nostalgia to winding mountain passes, each mile can feel like a tiny adventure waiting to happen. 
+                Travelers often plan routes for scenic beauty, but some of the best memories come from unexpected detours and unplanned stops. 
+                Studies have shown that road trips can reduce stress by encouraging mindfulness and spontaneity, though the quality of your playlist might be just as important. 
+                Whether you measure the journey in miles or in moments, the open road always has a story to tell.
+            </p>
+            <p>
+                Classic road trip games like I Spy, 20 Questions, and the License Plate Game have entertained passengers for generations. 
+                These simple challenges turn passing scenery into a source of competition, creativity, and laughter. 
+                Whether keeping kids occupied or sparking friendly rivalry among adults, in-car games make the miles pass faster.
+            </p>
+            <p>
+                Enjoy your road trip!
+            </p>
+        </div>
     </div>
 </body>
 </html>

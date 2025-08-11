@@ -1,0 +1,64 @@
+html {
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+div#gameSession {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 40px 1fr;
+    gap: 30px;
+    color: #F8B55F;
+}
+
+.topnav {
+    grid-column: span 2;
+}
+
+.games {
+    background-color: #3D365C;
+    text-align: center;
+    border-style: groove;
+    border-radius: 20px;
+}
+
+.card {
+    border-style: double;
+    margin: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-radius: 20px;
+    background-color: #7C4585;
+}
+
+button {
+    background-color: #C95792;
+    color: white;
+    border-radius: 20px;
+    height: auto;
+    height: 50px;
+    width: 200px;
+    font-size: 1.5rem;
+}
+
+input {
+    height: 45px;
+    width: 150px;
+    border-radius: 20px;
+    font-size: 1.5rem;
+}
+
+input#stateProvinceInput {
+    text-align: center;
+}
+
+.games  {
+    margin-bottom: 20px;
+}
+
+div.statsContainer {
+    display: flex;
+}
+
+.stats {
+    flex: 1;
+}

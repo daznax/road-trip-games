@@ -18,6 +18,12 @@ const sessionInfo = {
     gameData: gameData,
 };
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
+const prompts = [
+    "You're looking for a word that starts with... ",
+    "The next word you need should begin with... ",
+    "Find something beginning with the letter... ",
+    "Ah geez, you just need a word with... "
+]
 
 // Initialize the game. "Place" is an optional parameter to specify the trip location.
 function init() {
@@ -53,24 +59,35 @@ function initTripData() {
 //Clears the current session and resets all game data.
 function clearSession() {
     console.log("Clearing game data.");
-    sessionInfo.id = null;
-    sessionInfo.name = null;
-    sessionInfo.date = null;
-    gameData.sessionId = null;
-    gameData.states = [];
-    gameData.stateCount = 0;
-    gameData.amazonTrucks = 0;
-    gameData.abcGamesCompleted = 0;
-    gameData.abcGameInProgress = false;
-    gameData.currentLetterIndex = 0;
-    gameData.words = []
-    document.getElementById("stats").hidden = true;
-    console.log("Game data cleared.");
+    let result = confirm("Are you sure you want to clear session data?");
+    if (result) {
+        sessionInfo.id = null;
+        sessionInfo.name = null;
+        sessionInfo.date = null;
+        gameData.sessionId = null;
+        gameData.states = [];
+        gameData.stateCount = 0;
+        gameData.amazonTrucks = 0;
+        gameData.abcGamesCompleted = 0;
+        gameData.abcGameInProgress = false;
+        gameData.currentLetterIndex = 0;
+        gameData.words = []
+        document.getElementById("truckCount").innerText = "0"
+        document.getElementById("plateList").innerText = "No plates yet!"
+        document.getElementById("wordList").innerText = "No words yet!"
+        console.log("Game data cleared.");
+    }   else {
+        console.log('User canceled clear. Game data not cleared.')
+    }
 }
 //Core function for the ABC game. 
 function abcGameCore() {
     word = document.getElementById("abcInput").value.trim();
-    
+    if (word == "") {
+        console.log('No word specified. Will not process.')
+        return alert('You did not type in a word!')
+    }   
+
     //start new abc game if one is not in progress
     if (!gameData.abcGameInProgress) {
         console.log("Starting a new ABC game.");
@@ -104,36 +121,73 @@ function processOneWord(word) {
     if (firstLetter != targetLetter) {
         console.log(`Error: Word does not start with the correct letter. Expected ${targetLetter}, got ${firstLetter}`);
         error++
+        alert('Wrong letter!!')
         console.log(`Error count: ${error}`);
         return false
     } else {
-        gameData.words.push(word + ",")
+        gameData.words.push(word)
         gameData.currentLetterIndex++
-        document.getElementById("letter").innerText = `You're looking for a word that starts with... ${alphabet.charAt(gameData.currentLetterIndex).toUpperCase()}`;
+        randPrompt()
         console.log(`Word accepted: ${word}. Moving to next letter.`);
+        console.log(gameData.words)
     }
     if (firstLetter == "z") {
         gameData.abcGamesCompleted++
         alert("Congratulations! You've completed the ABC game! Resetting things for the next game")
         gameData.abcGameInProgress = false;
         gameData.currentLetterIndex = 0;
-    } return false
+        return false
+    }
+    displayList("words")
+
 }
+//displays word list for the stats section
+function displayList(context) {
+    let list = "";
+    if (context == "words") {
+        for (let x in gameData.words) {
+        list += gameData.words[x] + "<br/>";
+        }
+        document.getElementById("wordList").innerHTML = list
+    }   else if (context == "states") {
+        for (let x in gameData.states) {
+        list += gameData.states[x] + "<br/>";
+        }
+        document.getElementById("plateList").innerHTML = list
+    }   return
+}
+
 //TODO: Implement a real dictionary check.
 function validWord(word) {
     console.log("Determining if this is a valid word input.")
 }
+//used for ABC game to set a random prompt for the next letter!
+function randPrompt() {
+    let x = randInt()
+    console.log(x, prompts[x])
+    document.getElementById("letter").innerText = prompts[x] + alphabet.charAt(gameData.currentLetterIndex).toUpperCase()
+}
+
+function randInt() {
+    const min=Math.ceil(1)
+    const max=Math.floor(4)
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
 //Core function to log unique state license plates.
 function stateListCore() {
     state = document.getElementById("stateProvinceInput").value.trim().toUpperCase();
-    
-    if (!isUniqueState(state)) {
+    if (state == "") {
+        console.log('State is blank. Will not process.')
+        return alert('No state specified. Select a state from the list.');
+    }   else if (!isUniqueState(state)) {
         return alert(`State ${state} has already been logged.`);
-    } else {
+    }   else {
         gameData.states.push(state);
         gameData.stateCount++ ;
     }
-    console.log(`Unique plates: ${gameData.stateCount}`);
+    console.log(`Unique states: ${gameData.stateCount}`);
+    displayList("states")
 }
 
 function isUniqueState(state) {
@@ -149,6 +203,8 @@ function isUniqueState(state) {
 function incrementAmazonTrucks() {
     gameData.amazonTrucks += 1;
     console.log(`Amazon trucks counted: ${gameData.amazonTrucks}`);
+    console.log('Updating live stats tracker')
+    document.getElementById('truckCount').innerText = gameData.amazonTrucks
 }
 
 function incrementAbcGamesCompleted() {
