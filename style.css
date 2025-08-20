@@ -28,6 +28,7 @@ div#gameSession {
     padding-top: 5px;
     border-radius: 20px;
     background-color: #7C4585;
+    overflow: auto;
 }
 
 button {
@@ -57,8 +58,10 @@ input#stateProvinceInput {
 
 div.statsContainer {
     display: flex;
+    height: 200px;
 }
 
 .stats {
     flex: 1;
+    overflow-y: auto;
 }
