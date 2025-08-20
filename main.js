@@ -116,7 +116,7 @@ function processOneWord(word) {
     console.log('Current letter index:', index);
     targetLetter=alphabet.charAt(index)
     console.log('Current letter:', targetLetter);
-    firstLetter=word.charAt(0)
+    firstLetter=word.charAt(0).toLowerCase()
     error = 0
     if (firstLetter != targetLetter) {
         console.log(`Error: Word does not start with the correct letter. Expected ${targetLetter}, got ${firstLetter}`);
