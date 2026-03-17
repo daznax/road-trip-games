@@ -1,26 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <meta charset="UTF-8" />
+  <head>
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
     <title>Orabutt Road Trip</title>
     <script src="main.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <style>
-        #play {
-            height: 100px;
-            width: 300px;
-        }
+      #play {
+        height: 100px;
+        width: 300px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div>
-        <p>
-            <input hidden type="text" id="place" placeholder="Where to?"/>
-        </p>
-        <p>
-            <a href="./gameSession.html"><button id ="play" onclick=init()>Play Games!</button></a>
-            <a href="./sessionStats.html"><button id ="stats" hidden>Trip Stats</button></a>
-        </p>
+      <p>
+        <input hidden type="text" id="place" placeholder="Where to?" />
+      </p>
+      <p>
+        <a href="./gameSession.html"
+          ><button id="play" onclick="init()">Play Games!</button></a
+        >
+        <a href="./sessionStats.html"
+          ><button id="stats" hidden>Trip Stats</button></a
+        >
+      </p>
     </div>
-</body>
+  </body>
 </html>
