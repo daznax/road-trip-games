@@ -1,67 +1,95 @@
 html {
-    font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 div#gameSession {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 40px 1fr;
-    gap: 30px;
-    color: #F8B55F;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 40px 1fr;
+  gap: 30px;
+  color: #f8b55f;
+}
+
+@media (max-width: 600px) {
+  div#gameSession {
+    display: flex;
+    flex-direction: column;
+  }
+  div.topnav {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+@media (max-width: 420px) {
+  div.topnav {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .topnav {
-    grid-column: span 2;
+  grid-column: span 2;
 }
 
 .games {
-    background-color: #3D365C;
-    text-align: center;
-    border-style: groove;
-    border-radius: 20px;
+  background-color: #3d365c;
+  text-align: center;
+  border-style: groove;
+  border-radius: 20px;
 }
 
 .card {
-    border-style: double;
-    margin: 5px;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    border-radius: 20px;
-    background-color: #7C4585;
-    overflow: auto;
+  border-style: double;
+  margin: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-radius: 20px;
+  background-color: #7c4585;
+  overflow: auto;
+}
+
+.gameContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 button {
-    background-color: #C95792;
-    color: white;
-    border-radius: 20px;
-    height: auto;
-    height: 50px;
-    width: 200px;
-    font-size: 1.5rem;
+  background-color: #c95792;
+  color: white;
+  border-radius: 20px;
+  height: 50px;
+  width: 200px;
+  font-size: 1.5rem;
 }
 
 input {
-    height: 45px;
-    width: 150px;
-    border-radius: 20px;
-    font-size: 1.5rem;
+  height: 45px;
+  width: 150px;
+  border-radius: 20px;
+  font-size: 1.5rem;
+}
+
+label {
+  font-size: 1.5rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
 }
 
 input#stateProvinceInput {
-    text-align: center;
-}
-
-.games  {
-    margin-bottom: 20px;
+  text-align: center;
 }
 
 div.statsContainer {
-    display: flex;
-    height: 200px;
+  display: flex;
+  height: 200px;
 }
 
 .stats {
-    flex: 1;
-    overflow-y: auto;
+  flex: 1;
+  overflow-y: auto;
 }
