@@ -123,76 +123,72 @@ async function abcGameCore() {
   word.toLowerCase();
   console.log(`Processing word: ${word}`);
   quit = await processOneWord(word);
-  //TODO- add error handling and info later
   if (quit) {
-    alert("Quitting ABC Game");
+    endABCGame();
     return;
   }
 }
-//Processes a single word input for the ABC game.
+//Processes a single word input for the ABC game.\
+//returns true if we should quit, false otherwise
 async function processOneWord(word) {
   if (word == "quit") {
     console.log("Word = quit. Quitting ABC game.");
-    gameData.abcGameInProgress = false;
-    gameData.currentLetterIndex = 0;
-    if (gameData.useDictionary === true) {
-      gameData.useDictionary = false;
-      dictToggle.removeAttribute("disabled");
-      dictToggle.checked = !dictToggle.checked;
-    }
     return true;
   }
-  index = gameData.currentLetterIndex;
-  console.log("Current letter index:", index);
-  targetLetter = alphabet.charAt(index);
-  console.log("Current letter:", targetLetter);
+  targetLetter = alphabet.charAt(gameData.currentLetterIndex);
   firstLetter = word.charAt(0).toLowerCase();
-  error = 0;
   if (firstLetter != targetLetter) {
     console.log(
       `Error: Word does not start with the correct letter. Expected ${targetLetter}, got ${firstLetter}`,
     );
-    error++;
     alert("Wrong letter!!");
-    console.log(`Error count: ${error}`);
     return false;
   }
   if ((await validWord(word)) === false) {
     alert("Invalid word!");
-    error++;
-    console.log(`Error count: ${error}`);
     return false;
   } else {
     gameData.words.push(word);
     gameData.currentLetterIndex++;
     randPrompt();
     console.log(`Word accepted: ${word}. Moving to next letter.`);
-    console.log(gameData.words);
   }
   if (firstLetter == "z") {
     gameData.abcGamesCompleted++;
     alert(
       "Congratulations! You've completed the ABC game! Resetting things for the next game",
     );
-    gameData.abcGameInProgress = false;
-    gameData.currentLetterIndex = 0;
-    if (gameData.useDictionary === true) {
-      gameData.useDictionary = false;
-      dictToggle.removeAttribute("disabled");
-      dictToggle.checked = !dictToggle.checked;
-    }
+    endABCGame();
     return false;
   }
   displayList("words");
 }
+
+function endABCGame() {
+  gameData.abcGameInProgress = false;
+  gameData.currentLetterIndex = 0;
+  gameData.words = [];
+  if (gameData.useDictionary === true) {
+    gameData.useDictionary = false;
+    dictToggle.removeAttribute("disabled");
+    dictToggle.checked = !dictToggle.checked;
+  }
+  randPrompt();
+  displayList("words");
+}
+
 //displays word list for the stats section
 function displayList(context) {
   let list = "";
   if (context == "words") {
-    for (let x in gameData.words) {
-      list += gameData.words[x] + "<br/>";
+    if (gameData.words.length === 0) {
+      document.getElementById("wordList").innerHTML = "No words yet!";
+    } else {
+      for (let x in gameData.words) {
+        list += gameData.words[x] + "<br/>";
+      }
+      document.getElementById("wordList").innerHTML = list;
     }
-    document.getElementById("wordList").innerHTML = list;
   } else if (context == "states") {
     for (let x in gameData.states) {
       list += gameData.states[x] + "<br/>";
